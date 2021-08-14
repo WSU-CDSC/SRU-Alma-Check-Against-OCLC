@@ -1,13 +1,16 @@
+#Set Alma institution code
+$INST="01ALLIANCE_UNIV"
+
 #Set output filename
 $Path = "c:\path\to\output\file.csv"
 
 #Set input filename
 $OCLCListFile="C:\path\to\list\of\OCLC\IDs.txt"
+
+#Ingest file of OCLC IDs
 $OCLCList = Get-Content $OCLCListFile -ErrorAction SilentlyContinue
 
-#Set Alma institution code
-$INST="01ALLIANCE_UNIV"
-
+#Force use of TLS 1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 #Read designated .txt file and store each line sequentially in OCLC variable
@@ -33,9 +36,13 @@ $libraryNameText = "none"
 #Get carrier information
 $carrierText = "none"
 
+#Get boundwith information
+$boundwithText = "none"
+$localText = "none"
+
 #Report out and create output file
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText" 
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText" | Out-File -Append $Path
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" 
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" | Out-File -Append $Path
 
 }#if ($numRecords -eq 0)
 
@@ -60,9 +67,16 @@ $datafield338 = $indRecord.recordData.record.datafield | where {$_.tag -eq "338"
 $carrier = $datafield338.subfield | where {$_.code -eq "a"}
 $carrierText = $carrier."#text"
 
+#Get boundwith information, using 965 $a and $9
+$datafield965 = $indRecord.recordData.record.datafield | where {$_.tag -eq "965"}
+$boundwith = $datafield965.subfield | where {$_.code -eq "a"}
+$boundwithText = $boundwith."#text"
+$local = $datafield965.subfield | where {$_.code -eq "9"}
+$localText = $local."#text"
+
 #Report out and create output file
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText" 
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText" | Out-File -Append $Path
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" 
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" | Out-File -Append $Path
 
 }#foreach ($indRecord in $indRecords)
 
