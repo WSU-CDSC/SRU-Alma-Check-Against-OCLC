@@ -83,3 +83,6 @@ echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$loc
 }#else ($numRecords -gt 0)
 
 }#foreach ($OCLC in $OCLCList)
+
+Write-Host "Press any key to continue ..."
+$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
