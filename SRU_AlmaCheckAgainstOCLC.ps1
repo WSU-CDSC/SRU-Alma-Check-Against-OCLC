@@ -67,12 +67,10 @@ $datafield338 = $indRecord.recordData.record.datafield | where {$_.tag -eq "338"
 $carrier = $datafield338.subfield | where {$_.code -eq "a"}
 $carrierText = $carrier."#text"
 
-#Get boundwith information, using 965 $a and $9
+#Get boundwith information, using 965 $a
 $datafield965 = $indRecord.recordData.record.datafield | where {$_.tag -eq "965"}
 $boundwith = $datafield965.subfield | where {$_.code -eq "a"}
 $boundwithText = $boundwith."#text"
-$local = $datafield965.subfield | where {$_.code -eq "9"}
-$localText = $local."#text"
 
 #Report out and create output file
 echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" 
