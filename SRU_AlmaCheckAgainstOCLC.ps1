@@ -38,11 +38,10 @@ $carrierText = ""
 
 #Get boundwith information
 $boundwithText = ""
-$localText = ""
 
 #Report out and create output file
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" 
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" | Out-File -Append $Path
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText" 
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText" | Out-File -Append $Path
 
 }#if ($numRecords -eq 0)
 
@@ -73,8 +72,8 @@ $boundwith = $datafield965.subfield | where {$_.code -eq "a"}
 $boundwithText = $boundwith."#text"
 
 #Report out and create output file
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" 
-echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" | Out-File -Append $Path
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText" 
+echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText" | Out-File -Append $Path
 
 }#foreach ($indRecord in $indRecords)
 
