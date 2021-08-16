@@ -28,7 +28,7 @@ $numRecords = $result.searchRetrieveResponse.numberOfRecords
 if ($numRecords -eq 0) {
 
 #Get MMSID
-$mmsId = "none"
+$mmsId = ""
 
 #Get library name
 $libraryNameText = ""
