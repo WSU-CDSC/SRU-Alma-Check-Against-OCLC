@@ -31,14 +31,14 @@ if ($numRecords -eq 0) {
 $mmsId = "none"
 
 #Get library name
-$libraryNameText = "none"
+$libraryNameText = ""
 
 #Get carrier information
-$carrierText = "none"
+$carrierText = ""
 
 #Get boundwith information
-$boundwithText = "none"
-$localText = "none"
+$boundwithText = ""
+$localText = ""
 
 #Report out and create output file
 echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText;$localText" 
