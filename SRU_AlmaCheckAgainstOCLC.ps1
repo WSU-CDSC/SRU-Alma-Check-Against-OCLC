@@ -28,16 +28,16 @@ $numRecords = $result.searchRetrieveResponse.numberOfRecords
 if ($numRecords -eq 0) {
 
 #Get MMSID
-$mmsId = ""
+$mmsId = "none"
 
 #Get library name
-$libraryNameText = ""
+$libraryNameText = "none"
 
 #Get carrier information
-$carrierText = ""
+$carrierText = "none"
 
 #Get boundwith information
-$boundwithText = ""
+$boundwithText = "none"
 
 #Report out and create output file
 echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText" 
@@ -69,7 +69,8 @@ $carrierText = $carrier."#text"
 #Get boundwith information, using 965 $a
 $datafield965 = $indRecord.recordData.record.datafield | where {$_.tag -eq "965"}
 $boundwith = $datafield965.subfield | where {$_.code -eq "a"}
-$boundwithText = $boundwith."#text"
+if ($datafield965 -ne $null) {$boundwithText = $boundwith."#text"}
+else {$boundwithText = "none"}
 
 #Report out and create output file
 echo "$OCLC;$numRecords;$mmsId;$libraryNameText;$carrierText;$boundwithText" 
